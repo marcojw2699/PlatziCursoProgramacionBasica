@@ -4,10 +4,15 @@ let vidasJugador = 3
 let vidasEnemigo = 3
 
 function iniciarJuego(){
+    let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
+    sectionSeleccionarAtaque.style.display = "none"
+    
+    let sectionReiniciar = document.getElementById("reiniciar")
+    sectionReiniciar.style.display = "none"
+
     let botonMascotaJugador = document.getElementById("boton-mascota")
     botonMascotaJugador.addEventListener("click",seleccionarMascotaJugador)
     
-
     let botonFuego = document.getElementById("boton-fuego")
     botonFuego.addEventListener("click",ataqueFuego)
     
@@ -22,6 +27,11 @@ function iniciarJuego(){
 }
 
 function seleccionarMascotaJugador(){
+    let sectionSeleccionarMascota = document.getElementById("seleccionar-mascota")
+    sectionSeleccionarMascota.style.display = "none"
+
+    let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
+    sectionSeleccionarAtaque.style.display = "block"
 
     let inputHipodoge = document.getElementById('hipodoge')
     let inputCapipepo = document.getElementById('capipepo')
@@ -40,11 +50,9 @@ function seleccionarMascotaJugador(){
         alert("Selecciona una mascota")
         continuar = false
     }
-    if (continuar) {seleccionarMascotaEnemigo()}
-}
-
-function aleatorio(min,max){
-    return Math.floor(Math.random() * (max - min + 1) + min)
+    if (continuar) {
+        seleccionarMascotaEnemigo()
+    }
 }
 
 function seleccionarMascotaEnemigo(){
@@ -140,11 +148,17 @@ function crearMensajeFinal(resultadoFinal){
 
     let botonTierra = document.getElementById("boton-tierra")
     botonTierra.disabled = true
+
+    let sectionReiniciar = document.getElementById("reiniciar")
+    sectionReiniciar.style.display = "block"
 }
 
 function reiniciarJuego(){
     location.reload()
 }
- 
+
+function aleatorio(min,max){
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
 
 window.addEventListener("load", iniciarJuego)
