@@ -37,7 +37,6 @@ function seleccionarMascotaJugador(){
         alert("Selecciona una mascota")
         continuar = false
     }
-
     if (continuar) {seleccionarMascotaEnemigo()}
 }
 
@@ -56,7 +55,6 @@ function seleccionarMascotaEnemigo(){
     } else {
         spanMascotaEnemigo.innerHTML = "Ratigueya"
     }
-
 }
 
 function ataqueFuego(){
@@ -95,15 +93,23 @@ function combate(){
     if(ataqueJugador == ataqueEnemigo){
         crearMensaje("EMPATE")
     } else if((ataqueJugador == "FUEGO" && ataqueEnemigo == "TIERRA") || (ataqueJugador == "AGUA" && ataqueEnemigo == "FUEGO") || (ataqueJugador == "TIERRA" && ataqueEnemigo == "AGUA")){
-        crearMensaje("GANASTE")
         vidasEnemigo --
-        spanVidasEnemigo = vidasEnemigo
+        crearMensaje("GANASTE")
+        spanVidasEnemigo.innerHTML = vidasEnemigo
     } else {
-        resultadoCombate = crearMensaje("PERDISTE")
         vidasJugador --
+        crearMensaje("PERDISTE")
         spanVidasJugador.innerHTML = vidasJugador
     }
-    
+    revisarVidas()
+}
+
+function revisarVidas(){
+    if(vidasEnemigo == 0){
+        crearMensajeFinal("Felicitaciones, GANASTE 🤩!!")
+    } else if(vidasEnemigo == 0){
+        crearMensajeFinal("Lo siento, PERDISTE!!")
+    }
 }
 
 function crearMensaje(resultadoCombate){
@@ -111,6 +117,15 @@ function crearMensaje(resultadoCombate){
 
     let parrafo = document.createElement('p')
     parrafo.innerHTML = "Tu mascota atacó con " + ataqueJugador + ", la mascota del enemigo atacó con " + ataqueEnemigo + ". " + resultadoCombate
+
+    sectionMensajes.appendChild(parrafo)
+}
+
+function crearMensajeFinal(resultadoFinal){
+    let sectionMensajes = document.getElementById('mensajes')
+
+    let parrafo = document.createElement('p')
+    parrafo.innerHTML = resultadoFinal
 
     sectionMensajes.appendChild(parrafo)
 }
