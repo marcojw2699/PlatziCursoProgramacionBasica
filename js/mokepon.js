@@ -10,6 +10,7 @@ function seleccionarMascotaJugador(){
     let inputRatigueya = document.getElementById('ratigueya')
 
     let spanMascotaJugador = document.getElementById('mascota-jugador')
+    let continuar = true
 
     if (inputHipodoge.checked) {
         spanMascotaJugador.innerHTML = "Hipodoge"
@@ -19,9 +20,10 @@ function seleccionarMascotaJugador(){
         spanMascotaJugador.innerHTML = "Ratigueya"
     } else {
         alert("Selecciona una mascota")
+        continuar = false
     }
 
-    seleccionarMascotaEnemigo()
+    if (continuar) {seleccionarMascotaEnemigo()}
 }
 
 function aleatorio(min,max){
