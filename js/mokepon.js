@@ -8,14 +8,17 @@ function iniciarJuego(){
     botonMascotaJugador.addEventListener("click",seleccionarMascotaJugador)
     
 
-    let botonFuego = document.getElementById('boton-fuego')
+    let botonFuego = document.getElementById("boton-fuego")
     botonFuego.addEventListener("click",ataqueFuego)
     
-    let botonAgua = document.getElementById('boton-agua')
+    let botonAgua = document.getElementById("boton-agua")
     botonAgua.addEventListener("click",ataqueAgua)
 
-    let botonTierra = document.getElementById('boton-tierra')
+    let botonTierra = document.getElementById("boton-tierra")
     botonTierra.addEventListener("click",ataqueTierra)
+
+    let botonReiniciar = document.getElementById("reiniciar")
+    botonReiniciar.addEventListener("click",reiniciarJuego)
 }
 
 function seleccionarMascotaJugador(){
@@ -107,7 +110,7 @@ function combate(){
 function revisarVidas(){
     if(vidasEnemigo == 0){
         crearMensajeFinal("Felicitaciones, GANASTE 🤩!!")
-    } else if(vidasEnemigo == 0){
+    } else if(vidasJugador == 0){
         crearMensajeFinal("Lo siento, PERDISTE!!")
     }
 }
@@ -128,8 +131,20 @@ function crearMensajeFinal(resultadoFinal){
     parrafo.innerHTML = resultadoFinal
 
     sectionMensajes.appendChild(parrafo)
+
+    let botonFuego = document.getElementById("boton-fuego")
+    botonFuego.disabled = true
+    
+    let botonAgua = document.getElementById("boton-agua")
+    botonAgua.disabled = true
+
+    let botonTierra = document.getElementById("boton-tierra")
+    botonTierra.disabled = true
 }
 
+function reiniciarJuego(){
+    location.reload()
+}
  
 
 window.addEventListener("load", iniciarJuego)
