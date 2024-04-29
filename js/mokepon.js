@@ -27,11 +27,7 @@ function iniciarJuego(){
 }
 
 function seleccionarMascotaJugador(){
-    let sectionSeleccionarMascota = document.getElementById("seleccionar-mascota")
-    sectionSeleccionarMascota.style.display = "none"
-
-    let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
-    sectionSeleccionarAtaque.style.display = "flex"
+    
 
     let inputHipodoge = document.getElementById('hipodoge')
     let inputCapipepo = document.getElementById('capipepo')
@@ -52,10 +48,16 @@ function seleccionarMascotaJugador(){
     }
     if (continuar) {
         seleccionarMascotaEnemigo()
+        let sectionSeleccionarMascota = document.getElementById("seleccionar-mascota")
+        sectionSeleccionarMascota.style.display = "none"
+
+        let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
+        sectionSeleccionarAtaque.style.display = "flex"
     }
 }
 
 function seleccionarMascotaEnemigo(){
+    
     let numeroAleatorio = aleatorio(1,3)
     let spanMascotaEnemigo = document.getElementById('mascota-enemigo')
 
@@ -126,7 +128,7 @@ function revisarVidas(){
 function crearMensaje(resultadoCombate){
     let sectionResultados = document.getElementById("resultados")
     let sectionAtaqueJugador = document.getElementById("ataques-del-jugador")
-    let sectionAtaqueEnemigo = document.getElementById("ataques-del-jugador")
+    let sectionAtaqueEnemigo = document.getElementById("ataques-del-enemigo")
 
     let nuevoAtaqueJugador = document.createElement('p')
     let nuevoAtaqueEnemigo = document.createElement('p')

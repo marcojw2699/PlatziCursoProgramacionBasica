@@ -23,7 +23,7 @@ body{
     font-size: 20px;
 }
 
-.tarjetas{
+.tarjetas, .tarjetas-de-ataque{
     display: flex;
     gap: 10px
 }
@@ -97,4 +97,20 @@ input{
 .resumen-juego {
     display: grid;
     grid-template-columns: 100px 100px;
+}
+
+#vidas-jugador, #vidas-enemigo{
+    font-size: 32px;
+    margin-bottom: 0;
+}
+
+.resumen-jugador, .resumen-enemigo{
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 360px){
+    .tarjetas, .tarjetas-de-ataque{
+        flex-direction: column;
+    }
 }
