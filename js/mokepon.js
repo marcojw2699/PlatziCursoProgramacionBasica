@@ -22,7 +22,7 @@ function iniciarJuego(){
     let botonTierra = document.getElementById("boton-tierra")
     botonTierra.addEventListener("click",ataqueTierra)
 
-    let botonReiniciar = document.getElementById("reiniciar")
+    let botonReiniciar = document.getElementById("boton-reiniciar")
     botonReiniciar.addEventListener("click",reiniciarJuego)
 }
 
@@ -31,7 +31,7 @@ function seleccionarMascotaJugador(){
     sectionSeleccionarMascota.style.display = "none"
 
     let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
-    sectionSeleccionarAtaque.style.display = "block"
+    sectionSeleccionarAtaque.style.display = "flex"
 
     let inputHipodoge = document.getElementById('hipodoge')
     let inputCapipepo = document.getElementById('capipepo')
