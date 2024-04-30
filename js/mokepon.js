@@ -10,9 +10,6 @@ const botonAgua = document.getElementById("boton-agua")
 const botonTierra = document.getElementById("boton-tierra")
 const botonReiniciar = document.getElementById("boton-reiniciar")
 
-const inputHipodoge = document.getElementById('hipodoge')
-const inputCapipepo = document.getElementById('capipepo')
-const inputRatigueya = document.getElementById('ratigueya')
 
 const spanMascotaJugador = document.getElementById('mascota-jugador')
 const spanMascotaEnemigo = document.getElementById('mascota-enemigo')
@@ -26,6 +23,9 @@ let continuar = true
 let ataqueJugador
 let ataqueEnemigo
 let opcionDeMokepones
+let inputHipodoge
+let inputCapipepo
+let inputRatigueya
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -82,6 +82,10 @@ function iniciarJuego(){
         </label>
         `
     contenedorTarjetas.innerHTML += opcionDeMokepones
+
+    inputHipodoge = document.getElementById('Hipodoge')
+    inputCapipepo = document.getElementById('Capipepo')
+    inputRatigueya = document.getElementById('Ratigueya')
 
     })
     
