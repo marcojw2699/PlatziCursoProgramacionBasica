@@ -4,6 +4,7 @@ const sectionReiniciar = document.getElementById("reiniciar")
 const sectionResultados = document.getElementById("resultados")
 const sectionAtaqueJugador = document.getElementById("ataques-del-jugador")
 const sectionAtaqueEnemigo = document.getElementById("ataques-del-enemigo")
+const sectionVerMapa = document.getElementById("ver-mapa")
 const botonMascotaJugador = document.getElementById("boton-mascota")
 const botonReiniciar = document.getElementById("boton-reiniciar")
 
@@ -15,6 +16,7 @@ const spanVictoriasEnemigo = document.getElementById("victorias-enemigo")
 
 const contenedorTarjetas = document.getElementById("contenedor-tarjetas")
 const contenerdorAtaques = document.getElementById("contenedor-ataques")
+const mapa = document.getElementById("mapa")
 
 let mokepones = []
 let continuar = true
@@ -40,12 +42,20 @@ let mascotaEnemigo
 let victoriasJugador = 0
 let victoriasEnemigo = 0
 
+let lienzo = mapa.getContext("2d")
+
 class Mokepon {
     constructor(nombre, foto, vida){
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
+        this.x = 20
+        this.y = 30
+        this.ancho = 80
+        this.alto = 80
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = foto
     }
 }
 
@@ -83,6 +93,7 @@ mokepones.push(hipodoge,capipepo,ratigueya)
 function iniciarJuego(){
     sectionSeleccionarAtaque.style.display = "none"
     sectionReiniciar.style.display = "none"
+    sectionVerMapa.style.display = "none"
 
     mokepones.forEach((mokepon) => {
         opcionDeMokepones = `
@@ -122,7 +133,8 @@ function seleccionarMascotaJugador(){
         extraerAtaques(mascotaJugador)
         seleccionarMascotaEnemigo()
         sectionSeleccionarMascota.style.display = "none"
-        sectionSeleccionarAtaque.style.display = "flex"
+        sectionVerMapa.style.display = "flex"
+        //sectionSeleccionarAtaque.style.display = "flex"
     }
 }
 
@@ -192,8 +204,6 @@ function ataqueAleatorioEnemigo(){
     } else if (ataquesMascotaEnemigo[numeroAleatorio].nombre == "🌴"){
         ataqueEnemigo.push("TIERRA")
     }
-    console.log(ataqueJugador)
-    console.log(ataqueEnemigo)
     iniciarCombate()
 }
 
@@ -268,6 +278,37 @@ function reiniciarJuego(){
 
 function aleatorio(min,max){
     return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+function pintarPersonaje(){
+    lienzo.clearRect(0, 0, mapa.width, mapa.height)
+    lienzo.drawImage(
+        capipepo.mapaFoto,
+        capipepo.x,
+        capipepo.y,
+        capipepo.ancho,
+        capipepo.alto
+    )
+}
+
+function moverCapipepoDerecha(){
+    capipepo.x = capipepo.x + 5
+    pintarPersonaje()
+}
+
+function moverCapipepoIzquierda(){
+    capipepo.x = capipepo.x - 5
+    pintarPersonaje()
+}
+
+function moverCapipepoArriba(){
+    capipepo.y = capipepo.y - 5
+    pintarPersonaje()
+}
+
+function moverCapipepoAbajo(){
+    capipepo.y = capipepo.y + 5
+    pintarPersonaje()
 }
 
 window.addEventListener("load", iniciarJuego)
