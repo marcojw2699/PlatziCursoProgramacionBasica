@@ -43,6 +43,9 @@ let victoriasJugador = 0
 let victoriasEnemigo = 0
 
 let lienzo = mapa.getContext("2d")
+let intervalo
+let mapaBackground = new Image()
+mapaBackground.src = "./assets/mokemap.png"
 
 class Mokepon {
     constructor(nombre, foto, vida){
@@ -56,6 +59,8 @@ class Mokepon {
         this.alto = 80
         this.mapaFoto = new Image()
         this.mapaFoto.src = foto
+        this.velocidadX = 0
+        this.velocidadY = 0
     }
 }
 
@@ -134,6 +139,7 @@ function seleccionarMascotaJugador(){
         seleccionarMascotaEnemigo()
         sectionSeleccionarMascota.style.display = "none"
         sectionVerMapa.style.display = "flex"
+        iniciarMapa()
         //sectionSeleccionarAtaque.style.display = "flex"
     }
 }
@@ -281,6 +287,8 @@ function aleatorio(min,max){
 }
 
 function pintarPersonaje(){
+    capipepo.x = capipepo.x + capipepo.velocidadX
+    capipepo.y = capipepo.y + capipepo.velocidadY
     lienzo.clearRect(0, 0, mapa.width, mapa.height)
     lienzo.drawImage(
         capipepo.mapaFoto,
@@ -292,23 +300,52 @@ function pintarPersonaje(){
 }
 
 function moverCapipepoDerecha(){
-    capipepo.x = capipepo.x + 5
-    pintarPersonaje()
+    capipepo.velocidadX = 5
 }
 
 function moverCapipepoIzquierda(){
-    capipepo.x = capipepo.x - 5
-    pintarPersonaje()
+    capipepo.velocidadX = -5
 }
 
 function moverCapipepoArriba(){
-    capipepo.y = capipepo.y - 5
-    pintarPersonaje()
+    capipepo.velocidadY = -5
 }
 
 function moverCapipepoAbajo(){
-    capipepo.y = capipepo.y + 5
-    pintarPersonaje()
+    capipepo.velocidadY = 5
+}
+
+function detenerMovimiento(){
+    capipepo.velocidadX = 0
+    capipepo.velocidadY = 0
+}
+
+function teclaPresionada(event){
+    switch (event.key) {
+        case 'ArrowUp':
+            moverCapipepoArriba()
+            break;
+        case 'ArrowDown':
+            moverCapipepoAbajo()
+            break;
+        case 'ArrowLeft':
+            moverCapipepoIzquierda()
+            break;
+        case 'ArrowRight':
+            moverCapipepoDerecha()
+            break;        
+
+        default:
+            break;
+    }
+}
+
+function iniciarMapa(){
+    mapa.width = 800
+    mapa.height = 600
+    intervalo = setInterval(pintarPersonaje, 50)
+    window.addEventListener('keydown',teclaPresionada)
+    window.addEventListener('keyup',detenerMovimiento)
 }
 
 window.addEventListener("load", iniciarJuego)
