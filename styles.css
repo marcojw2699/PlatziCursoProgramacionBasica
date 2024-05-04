@@ -71,6 +71,17 @@ input:checked + label{
     justify-content: center;
 }
 
+#ver-mapa button{
+    width: 80px;
+    height: 40px;
+    border-radius: 20px;
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    margin: 8px 0;
+}
+
 #seleccionar-ataque{
     flex-direction: column;
     align-items: center;
@@ -124,6 +135,14 @@ input:checked + label{
 
 @media (max-width: 360px){
     .tarjetas, .tarjetas-de-ataque{
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 360px){
+    #ver-mapa div{
+        display: flex;
+        align-items: center;
         flex-direction: column;
     }
 }

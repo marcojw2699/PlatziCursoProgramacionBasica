@@ -53,11 +53,13 @@ let intervalo
 let mapaBackground = new Image()
 mapaBackground.src = "./assets/mokemap.png" 
 let anchoMapa = window.innerWidth - 20
-let alturaMapa = anchoMapa * 0.75
 
 if (anchoMapa < anchoMaxMapa){
-    mapa.width = anchoMapa    
-} else {mapa.width = anchoMaxMapa - 20}
+    anchoMapa = anchoMapa    
+} else {anchoMapa = anchoMaxMapa - 20}
+
+let alturaMapa = anchoMapa * 0.75
+mapa.width = anchoMapa
 mapa.height = alturaMapa
 
 class Mokepon {
