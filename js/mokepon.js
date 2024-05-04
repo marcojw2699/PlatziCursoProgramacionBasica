@@ -400,8 +400,6 @@ function revisarColision(enemigo){
     detenerMovimiento()
     clearInterval(intervalo)
     mascotaEnemigoObjeto = obtenerObjetoMascota(enemigo.nombre)
-    contadorColisiones = contadorColisiones +1
-
     seleccionarMascotaEnemigo()
     sectionVerMapa.style.display = "none"
     sectionSeleccionarAtaque.style.display = "flex"    
