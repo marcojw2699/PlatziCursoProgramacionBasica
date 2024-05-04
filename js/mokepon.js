@@ -23,6 +23,8 @@ let continuar = true
 let ataqueJugador = []
 let ataqueEnemigo = []
 let opcionDeMokepones
+let opcionDeAtaques
+
 let inputHipodoge
 let inputCapipepo
 let inputRatigueya
@@ -37,8 +39,9 @@ let botonAgua
 let botonTierra
 let botones = []
 
-let mascotaJugador
 let mascotaJugadorObjeto
+let mascotaJugador
+let mascotaEnemigoObjeto
 let mascotaEnemigo
 let victoriasJugador = 0
 let victoriasEnemigo = 0
@@ -150,31 +153,32 @@ function seleccionarMascotaJugador(){
         continuar = false
     }
     if (continuar) {
-        mascotaJugadorObjeto = obtenerObjetoMascota()
+        mascotaJugadorObjeto = obtenerObjetoMascota(mascotaJugador)
         ataquesMascotaJugador = mascotaJugadorObjeto.ataques
-        seleccionarMascotaEnemigo()
         sectionSeleccionarMascota.style.display = "none"
         sectionVerMapa.style.display = "flex"
+        
         iniciarMapa()
-        //sectionSeleccionarAtaque.style.display = "flex"
+        //mostrarAtaques()
+        
     }
 }
 
-function obtenerObjetoMascota(){
+function obtenerObjetoMascota(mascotaNombre){
     for(let i=0; i<mokepones.length; i++) {
-        if (mascotaJugador == mokepones[i].nombre){
+        if (mascotaNombre == mokepones[i].nombre){
             return mokepones[i]
         }
     }
 }
 
 
-function mostrarAtaques(ataquesMascotaJugador){
+function mostrarAtaques(){
     ataquesMascotaJugador.forEach((ataque) => {
         opcionDeAtaques = `
         <button class="boton-de-ataque BAtaque" id=${ataque.id}>${ataque.nombre}</button>
         `
-    contenerdorAtaques.innerHTML += opcionDeAtaques
+        contenerdorAtaques.innerHTML += opcionDeAtaques
     })
     
     botonFuego = document.getElementById("boton-fuego")
@@ -185,7 +189,16 @@ function mostrarAtaques(ataquesMascotaJugador){
 
 }
 
+function seleccionarMascotaEnemigo(){
+    spanMascotaEnemigo.innerHTML = mascotaEnemigoObjeto.nombre
+    mascotaEnemigo = mascotaEnemigoObjeto.nombre
+    ataquesMascotaEnemigo = mascotaEnemigoObjeto.ataques
+    
+    secuenciaAtaque()
+}
+
 function secuenciaAtaque(){
+    mostrarAtaques()
     botones.forEach((boton) => {
         boton.addEventListener("click", (e) =>{
             if (e.target.textContent == "🔥"){
@@ -204,15 +217,6 @@ function secuenciaAtaque(){
             ataqueAleatorioEnemigo()
         })
     })
-}
-
-function seleccionarMascotaEnemigo(){
-    let numeroAleatorio = aleatorio(0, mokepones.length -1)
-    spanMascotaEnemigo.innerHTML = mokepones[numeroAleatorio].nombre
-    mascotaEnemigo = mokepones[numeroAleatorio].nombre
-    ataquesMascotaEnemigo = mokepones[numeroAleatorio].ataques
-    
-    secuenciaAtaque()
 }
 
 
@@ -394,9 +398,14 @@ function revisarColision(enemigo){
         return
     }
     detenerMovimiento()
-    alert("Hay colisión con " + enemigo.nombre)
-    
+    clearInterval(intervalo)
+    mascotaEnemigoObjeto = obtenerObjetoMascota(enemigo.nombre)
+    contadorColisiones = contadorColisiones +1
 
+    seleccionarMascotaEnemigo()
+    sectionVerMapa.style.display = "none"
+    sectionSeleccionarAtaque.style.display = "flex"    
+    
 }
 
 window.addEventListener("load", iniciarJuego)
