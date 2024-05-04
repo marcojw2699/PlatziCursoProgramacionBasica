@@ -38,6 +38,7 @@ let botonTierra
 let botones = []
 
 let mascotaJugador
+let mascotaJugadorObjeto
 let mascotaEnemigo
 let victoriasJugador = 0
 let victoriasEnemigo = 0
@@ -135,7 +136,8 @@ function seleccionarMascotaJugador(){
         continuar = false
     }
     if (continuar) {
-        extraerAtaques(mascotaJugador)
+        mascotaJugadorObjeto = obtenerObjetoMascota()
+        ataquesMascotaJugador = mascotaJugadorObjeto.ataques
         seleccionarMascotaEnemigo()
         sectionSeleccionarMascota.style.display = "none"
         sectionVerMapa.style.display = "flex"
@@ -144,14 +146,14 @@ function seleccionarMascotaJugador(){
     }
 }
 
-function extraerAtaques(mascotaJugador){
+function obtenerObjetoMascota(){
     for(let i=0; i<mokepones.length; i++) {
         if (mascotaJugador == mokepones[i].nombre){
-            ataquesMascotaJugador = mokepones[i].ataques
+            return mokepones[i]
         }
     }
-    mostrarAtaques(ataquesMascotaJugador)
 }
+
 
 function mostrarAtaques(ataquesMascotaJugador){
     ataquesMascotaJugador.forEach((ataque) => {
@@ -286,38 +288,45 @@ function aleatorio(min,max){
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-function pintarPersonaje(){
-    capipepo.x = capipepo.x + capipepo.velocidadX
-    capipepo.y = capipepo.y + capipepo.velocidadY
+function pintarCanvas(){
+    mascotaJugadorObjeto.x = mascotaJugadorObjeto.x + mascotaJugadorObjeto.velocidadX
+    mascotaJugadorObjeto.y = mascotaJugadorObjeto.y + mascotaJugadorObjeto.velocidadY
     lienzo.clearRect(0, 0, mapa.width, mapa.height)
     lienzo.drawImage(
-        capipepo.mapaFoto,
-        capipepo.x,
-        capipepo.y,
-        capipepo.ancho,
-        capipepo.alto
+        mapaBackground,
+        0,
+        0,
+        mapa.width,
+        mapa.height
+    )
+    lienzo.drawImage(
+        mascotaJugadorObjeto.mapaFoto,
+        mascotaJugadorObjeto.x,
+        mascotaJugadorObjeto.y,
+        mascotaJugadorObjeto.ancho,
+        mascotaJugadorObjeto.alto
     )
 }
 
 function moverCapipepoDerecha(){
-    capipepo.velocidadX = 5
+    mascotaJugadorObjeto.velocidadX = 5
 }
 
 function moverCapipepoIzquierda(){
-    capipepo.velocidadX = -5
+    mascotaJugadorObjeto.velocidadX = -5
 }
 
 function moverCapipepoArriba(){
-    capipepo.velocidadY = -5
+    mascotaJugadorObjeto.velocidadY = -5
 }
 
 function moverCapipepoAbajo(){
-    capipepo.velocidadY = 5
+    mascotaJugadorObjeto.velocidadY = 5
 }
 
 function detenerMovimiento(){
-    capipepo.velocidadX = 0
-    capipepo.velocidadY = 0
+    mascotaJugadorObjeto.velocidadX = 0
+    mascotaJugadorObjeto.velocidadY = 0
 }
 
 function teclaPresionada(event){
@@ -341,9 +350,9 @@ function teclaPresionada(event){
 }
 
 function iniciarMapa(){
-    mapa.width = 800
-    mapa.height = 600
-    intervalo = setInterval(pintarPersonaje, 50)
+    mapa.width = 320
+    mapa.height = 240
+    intervalo = setInterval(pintarCanvas, 50)
     window.addEventListener('keydown',teclaPresionada)
     window.addEventListener('keyup',detenerMovimiento)
 }
