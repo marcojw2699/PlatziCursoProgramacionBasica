@@ -1,0 +1,22 @@
+{
+  "name": "mokepon",
+  "version": "1.0.0",
+  "description": "This repository contains all content related to the development of Platzi class \"Curso básico de programación\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcojw2699/PlatziCursoProgramacionBasica.git"
+  },
+  "author": "MJ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcojw2699/PlatziCursoProgramacionBasica/issues"
+  },
+  "homepage": "https://github.com/marcojw2699/PlatziCursoProgramacionBasica#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
