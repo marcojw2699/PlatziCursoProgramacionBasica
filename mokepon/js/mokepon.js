@@ -20,6 +20,8 @@ const mapa = document.getElementById("mapa")
 
 const anchoMaxMapa = 350
 
+let jugadorId = null
+
 let mokepones = []
 let continuar = true
 let ataqueJugador = []
@@ -157,7 +159,7 @@ function unirseAlJuego(){
             if (res.ok){
                 res.text()
                     .then(function (respuesta){
-                        console.log(respuesta)
+                        jugadorId = respuesta
                     })
             }
         })
@@ -185,9 +187,21 @@ function seleccionarMascotaJugador(){
         sectionVerMapa.style.display = "flex"
         
         iniciarMapa()
-        //mostrarAtaques()
+        seleccionarMokepon()
         
     }
+}
+
+function seleccionarMokepon(){
+    fetch(`http://localhost:8080/mokepon/${jugadorId}`,{
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            mokepon: mascotaJugador
+        })
+    })
 }
 
 function obtenerObjetoMascota(mascotaNombre){
