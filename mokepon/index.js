@@ -41,14 +41,11 @@ app.post("/mokepon/:jugadorId", (req, res) => {
     const nombre = req.body.mokepon || ""
     const mokepon = new Mokepon(nombre)
 
-    const jugadorIndex = jugadores.findIndex(jugador => jugadorId == jugador.id)
+    const jugadorIndex = jugadores.findIndex(jugador => jugadorId === jugador.id)
 
     if(jugadorIndex >= 0) {
         jugadores[jugadorIndex].asignarMokepon(mokepon)
     } 
-
-    console.log(jugadores)
-    console.log(jugadorId)
     res.end()
 })
 
@@ -57,14 +54,13 @@ app.post("/mokepon/:jugadorId/posicion", (req, res) => {
     const x = req.body.x || 0
     const y = req.body.y || 0
 
-    const jugadorIndex = jugadores.findIndex(jugador => jugadorId == jugador.id)
+    const jugadorIndex = jugadores.findIndex(jugador => jugadorId === jugador.id)
 
     if(jugadorIndex >= 0) {
         jugadores[jugadorIndex].actualizarPosicion(x,y)
     } 
     
     const enemigos = jugadores.filter((jugador) => jugadorId !== jugador.id)
-    
     res.send({
         enemigos
     })
