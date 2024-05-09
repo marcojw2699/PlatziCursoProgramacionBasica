@@ -272,28 +272,27 @@ function enviarAtaques(){
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            ataques: ataquesMascotaJugador
+            ataques: ataqueJugador
         })
     })
+
+    intervalo = setInterval(obtenerAtaques,50)
 }
 
-function ataqueAleatorioEnemigo(){
-    let numeroAleatorio = aleatorio(0,ataquesMascotaEnemigo.length-1)
-    
-    if(ataquesMascotaEnemigo[numeroAleatorio].nombre === "🔥"){
-        ataqueEnemigo.push("FUEGO")
-    } else if(ataquesMascotaEnemigo[numeroAleatorio].nombre === "💧"){
-        ataqueEnemigo.push("AGUA")
-    } else if (ataquesMascotaEnemigo[numeroAleatorio].nombre === "🌴"){
-        ataqueEnemigo.push("TIERRA")
-    }
-    iniciarCombate()
-}
+function obtenerAtaques(){
+    fetch(`http://localhost:8080/mokepon/${enemigoId}/ataques`)
+        .then(function(res){
+            if(res.ok){
+                res.json()
+                    .then(function({ataques}){
+                        if(ataques.length === 5){
+                            ataqueEnemigo = ataques
+                            combate()
+                        }
+                    })
+            }
+        })
 
-function iniciarCombate(){
-    if (ataqueJugador.length === 5) {
-        combate()
-    }
 }
 
 function indexAmbosOponentes(indexJugador,indexEnemigo){
@@ -302,7 +301,7 @@ function indexAmbosOponentes(indexJugador,indexEnemigo){
 }
 
 function combate(){
-
+    clearInterval(intervalo)
     for (let index = 0; index < ataqueJugador.length; index++) {
         
         if(ataqueJugador[index] === ataqueEnemigo[index]){
@@ -398,7 +397,6 @@ function enviarPosicion(x,y){
         if(res.ok){
             res.json()
                 .then(function ({enemigos}){
-                    //console.log(enemigos)
                     mokeponesEnemigos = enemigos.map(function (enemigo) {
                         let mokeponEnemigo = null
                         mokeponNombre = enemigo.mokepon.nombre || ""
