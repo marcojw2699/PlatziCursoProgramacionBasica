@@ -133,13 +133,13 @@ input:checked + label{
     margin-bottom: 0;
 }
 
-@media (max-width: 360px){
+@media (max-width: 400px){
     .tarjetas, .tarjetas-de-ataque{
         flex-direction: column;
     }
 }
 
-@media (max-width: 360px){
+@media (max-width: 400px){
     #ver-mapa div{
         display: flex;
         align-items: center;
