@@ -1,2 +1,2 @@
 # PlatziCursoProgramacionBasica
-This repository contains all content related to the development of Platzi class "Curso básico de programación"
+This repository contains all content related to the development of Platzi class "Curso básico de programación". This class was finally ended on May 2024, after too much effort!
